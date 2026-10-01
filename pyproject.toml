@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "npkg"
+version = "0.1.0"
+description = "Gestionnaire de paquets Linux minimaliste adossé aux canaux nixpkgs (résolution Hydra + cache binaire Nix, sans démon Nix)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "npkg contributors" }]
+keywords = ["nixpkgs", "package manager", "nix", "store", "linux"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Installation/Setup",
+]
+# Volontairement vide : npkg ne dépend d'aucune bibliothèque externe.
+dependencies = []
+
+[project.optional-dependencies]
+# `zstandard` accélère (et permet) la lecture des nar.zst quand Python < 3.14
+# et que le binaire `zstd` est absent.
+zstd = ["zstandard>=0.18"]
+
+[project.scripts]
+npkg = "npkg.cli:main"
+
+[project.urls]
+Documentation = "https://github.com/npkg/npkg#readme"
+Source = "https://github.com/npkg/npkg"
+
+[tool.setuptools.packages.find]
+where = ["lib"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

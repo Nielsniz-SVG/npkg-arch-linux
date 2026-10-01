@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <title>Hydra - Build 347137367 of job nixpkgs:unstable:hello.x86_64-linux</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" /><script type="text/javascript" src="https://hydra.nixos.org/static/js/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/jquery/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/moment/moment-2.24.0.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://hydra.nixos.org/static/fontawesome/css/all.css" rel="stylesheet" />
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/popper.min.js"></script>
+<script type="text/javascript" src="https://hydra.nixos.org/static/bootstrap/js/bootstrap.min.js"></script>
+<link href="https://hydra.nixos.org/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- hydra.css may need to be moved to before boostrap to make the @media rule work. -->
+<link rel="stylesheet" href="https://hydra.nixos.org/static/css/hydra.css" type="text/css" />
+<link rel="stylesheet" href="https://hydra.nixos.org/static/css/rotated-th.css" type="text/css" />
+
+<style>
+  .popover { max-width: 40%; }
+</style>
+
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/bootbox.min.js"></script>
+
+<link rel="stylesheet" href="https://hydra.nixos.org/static/css/tree.css" type="text/css" />
+
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/common.js"></script>
+
+<script type="text/javascript" src="https://hydra.nixos.org/static/js/ansi_up.js"></script>
+      <meta name="google-signin-client_id" content="816926039128-ia4s4rsqrq998rsevce7i09mo6a4nffg.apps.googleusercontent.com">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="https://hydra.nixos.org/">            <img src="https://hydra.nixos.org/logo" alt="Hydra Logo" class="logo" />        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav mr-auto">
+  <li class="nav-item dropdown" id="347137367" >
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Status<b class="caret"></b></a>
+    <div class="dropdown-menu">  <a class="dropdown-item"href="https://hydra.nixos.org/queue_summary" >Queue (149/107842)  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/status" >Running builds  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/machines" >Machine status  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/evals" >Latest evaluations  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/all" >Latest builds  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/steps" >Latest steps  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/queue_runner_status" >Queue Runner Status  </a>    </div>
+  </li>  <li class="nav-item dropdown" id="347137367" >
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Project<b class="caret"></b></a>
+    <div class="dropdown-menu">      <h6 class="dropdown-header">nixpkgs</h6>
+      <div class="dropdown-divider"></div>  <a class="dropdown-item"href="https://hydra.nixos.org/project/nixpkgs" >Overview  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/project/nixpkgs/all" >Latest builds  </a>    </div>
+  </li>  <li class="nav-item dropdown" id="347137367" >
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Jobset<b class="caret"></b></a>
+    <div class="dropdown-menu">      <h6 class="dropdown-header">unstable</h6>
+      <div class="dropdown-divider"></div>  <a class="dropdown-item"href="https://hydra.nixos.org/jobset/nixpkgs/unstable" >Overview  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/jobset/nixpkgs/unstable/evals" >Evaluations  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/jobset/nixpkgs/unstable/all" >Latest builds  </a>    </div>
+  </li>  <li class="nav-item dropdown" id="347137367" >
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Job<b class="caret"></b></a>
+    <div class="dropdown-menu">      <h6 class="dropdown-header">hello.x86_64-linux</h6>
+      <div class="dropdown-divider"></div>  <a class="dropdown-item"href="https://hydra.nixos.org/job/nixpkgs/unstable/hello.x86_64-linux" >Overview  </a>  <a class="dropdown-item"href="https://hydra.nixos.org/job/nixpkgs/unstable/hello.x86_64-linux/all" >Latest builds  </a>    </div>
+  </li>
+</ul>  <form class="form-inline" action="https://hydra.nixos.org/search">
+    <input name="query" type="text" class="form-control" placeholder="Search" value=""/>
+  </form>
+<ul class="navbar-nav">
+  <li class="nav-item dropdown" id="sign-in-menu" >
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Sign in<b class="caret"></b></a>
+    <div class="dropdown-menu dropdown-menu-right">        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <div id="g_id_onload" data-client_id="816926039128-ia4s4rsqrq998rsevce7i09mo6a4nffg.apps.googleusercontent.com" data-auto_prompt="false" data-callback="onGoogleSignIn">
+        </div>
+        <div class="g_id_signin" data-type="standard"></div>
+        <div class="dropdown-divider"></div>        <a class="dropdown-item" href="/github-redirect?after=build%2F347137367">Sign in with GitHub</a>
+        <div class="dropdown-divider"></div>      <a class="dropdown-item" href="#hydra-signin" data-toggle="modal">Sign in with a Hydra account</a>    </div>
+  </li>
+</ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="skip-topbar"></div>
+        <div class="page-header">Build 347137367 of job <a href="https://hydra.nixos.org/project/nixpkgs">nixpkgs</a>:<a href="https://hydra.nixos.org/jobset/nixpkgs/unstable">unstable</a>:<a href="https://hydra.nixos.org/job/nixpkgs/unstable/hello.x86_64-linux">hello.x86_64-linux</a>        </div>
+<ul class="nav nav-tabs">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" area-haspopup="true" aria-expanded="false">Actions</a>
+    <div class="dropdown-menu">        <a class="dropdown-item" href="#reproduce" data-toggle="modal">Reproduce locally</a>    </div>
+  </li>
+
+  <li class="nav-item"><a class="nav-link active" href="#tabs-summary" data-toggle="tab">Summary</a></li>  <li class="nav-item"><a class="nav-link" href="#tabs-details" data-toggle="tab">Details</a></li>
+  <li class="nav-item"><a class="nav-link" href="#tabs-buildinputs" data-toggle="tab">Inputs</a></li><li class="nav-item"><a class="nav-link" href="#tabs-build-deps" data-toggle="tab">Build Dependencies</a></li></ul>
+
+<div id="generic-tabs" class="tab-content">
+
+  <div id="tabs-summary" class="tab-pane active">
+
+    <table>
+      <tr>
+        <td>      <img src="https://hydra.nixos.org/static/images/emojione-check-2714.svg" height="128" width="128" title="Succeeded" alt="Succeeded" class="build-status" />        </td>
+        <td>
+          <table class="info-table">
+            <tr>
+              <th>Build ID:</th>
+              <td>347137367</td>
+            </tr>
+            <tr>
+              <th>Status:</th>
+              <td>      <strong>Success</strong>              </td>
+            </tr>
+            <tr>
+              <th>System:</th>
+              <td><tt>x86_64-linux</tt></td>
+            </tr>              <tr>
+                <th>Nix name:</th>
+                <td><tt>hello-2.12.3</tt></td>
+              </tr>              <tr>
+                <th>Part of:</th>
+                <td>
+                  <a href="https://hydra.nixos.org/eval/1829617">evaluation 1829617</a> (and <a href="https://hydra.nixos.org/build/347137367/evals">5 others</a>)                </td>
+              </tr>              <tr>
+                <th>Cached from:</th>
+                <td><tt><a href="https://hydra.nixos.org/project/nixpkgs"><tt>nixpkgs</tt></a>:<a href="https://hydra.nixos.org/jobset/nixpkgs/staging-next"><tt>staging-next</tt></a>:<a href="https://hydra.nixos.org/job/nixpkgs/staging-next/tests.config.allowPkgsInPermittedInsecurePackages.x86_64-linux">tests.config.allowPkgsInPermittedInsecurePackages.x86_64-linux</a></tt> <a href="https://hydra.nixos.org/build/346746655">build 346746655</a></td>
+              </tr>                <tr>
+                  <th>Duration:</th>
+                  <td>29s</td>
+                </tr>              <tr>
+                <th>Finished at:</th>
+                <td><time title="2026-09-28 18:09:31 (UTC)" datetime="2026-09-28T18:09:31Z" data-timestamp="1790618971" class="date is-absolute">2026-09-28 18:09:31</time></td>
+              </tr>              <tr>
+                <th>Logfile:</th>
+                <td><a class="btn btn-secondary btn-sm" href="https://hydra.nixos.org/build/346746655/step/1/log">pretty</a>
+<a class="btn btn-secondary btn-sm" href="https://hydra.nixos.org/build/346746655/step/1/log/raw">raw</a>
+<a class="btn btn-secondary btn-sm" href="https://hydra.nixos.org/build/346746655/step/1/log/tail">tail</a>                </td>
+              </tr>          </table>
+        </td>
+      </tr>
+    </table>
+
+      <h3>Build products</h3>
+
+  <table class="table table-striped">
+    <tr>
+       <th></th>
+       <th>Type</th>
+       <th>Link</th>
+       <th>Actions</th>
+    </tr>
+          <tr class="product">
+            <td>
+              <img src="https://hydra.nixos.org/static/images/nix-build.png" alt="Source" />
+            </td>
+            <td>
+              Nix package
+            </td>
+            <td>
+              <tt>hello-2.12.3</tt>
+            </td>
+            <td>  <button type="button" class="btn hydra-popover btn-secondary btn-sm" data-toggle="popover" data-html="true" data-placement="bottom" data-content=" &lt;p&gt;You can install this package using the Nix package
+              manager from the command-line:&lt;/p&gt;
+
+                &lt;div class=&quot;card bg-light&quot;&gt;&lt;div class=&quot;card-body p-2&quot;&gt;&lt;code&gt;&lt;span class=&quot;shell-prompt&quot;&gt;$ &lt;/span&gt;nix-env -i /nix/store/5z2yp3ysx8476c8g5w25b0smlgkjvaq3-hello-2.12.3 --option binary-caches https://cache.nixos.org&lt;/code&gt;&lt;/div&gt;&lt;/div&gt;">Help  </button>            </td>
+          </tr>
+  </table>
+        <h3>Changes</h3>  <table class="table table-striped table-condensed">      <tr><th>Input</th><th>Changes</th></tr>                  <tr><td>
+                    <b>nixpkgs</b></td><td><tt>        <a target="_blank" href="https://github.com/nixos/nixpkgs/compare/f45c6f04c2f013f004bf94e284e95d72898d9393...6c6973cdf55fbe86579846439ec5ddd9a1198e46">f45c6f04c2f0 to 6c6973cdf55f</a></tt>
+                    (<a class="rev-copy" href="javascript:void(0)" onclick="copyToClipboard('6c6973cdf55fbe86579846439ec5ddd9a1198e46', this); return false;" title="Click to copy full revision: 6c6973cdf55fbe86579846439ec5ddd9a1198e46">copy</a>)
+                  </td></tr>  </table>        <h3>Previous builds</h3>
+        <table class="table table-striped table-condensed">
+          <thead>
+            <th>Last successful build <time title="2026-09-11 19:41:06 (UTC)" datetime="2026-09-11T19:41:06Z" data-timestamp="1789155666" class="date is-absolute">2026-09-11 19:41:06</time></th>            <th>This build <time data-timestamp="1790618300" datetime="2026-09-28T17:58:20Z" title="2026-09-28 17:58:20 (UTC)" class="date is-absolute">2026-09-28 17:58:20</time>            </th>
+          </thead>
+          <tr>
+            <td valign="center">      <img src="https://hydra.nixos.org/static/images/emojione-check-2714.svg" height="32" width="32" title="Succeeded" alt="Succeeded" class="build-status" /><a href="https://hydra.nixos.org/build/345280811">build 345280811</a></td>            <td>      <img src="https://hydra.nixos.org/static/images/emojione-check-2714.svg" height="32" width="32" title="Succeeded" alt="Succeeded" class="build-status" /><a href="https://hydra.nixos.org/build/347137367">build 347137367</a></td>
+          </tr>
+          <tr>
+            <td></td>          </tr>
+        </table>
+  </div>
+
+  <div id="tabs-details" class="tab-pane">
+
+    <table class="info-table">
+      <tr>
+        <th>Queued at:</th>
+        <td><time title="2026-09-28 17:58:20 (UTC)" datetime="2026-09-28T17:58:20Z" data-timestamp="1790618300" class="date is-absolute">2026-09-28 17:58:20</time></td>
+      </tr>        <tr>
+          <th>Nix expression:</th>
+          <td>file <tt>pkgs/top-level/release.nix</tt> in input <tt>nixpkgs</tt></td>
+        </tr>      <tr>
+        <th>Nix name:</th>
+        <td><tt>hello-2.12.3</tt></td>
+      </tr>
+      <tr>
+        <th>Short description:</th>
+        <td>Program that produces a familiar, friendly greeting</td>
+      </tr>
+      <tr>
+        <th>License:</th>
+        <td>gpl3Plus</td>
+      </tr>
+      <tr>
+        <th>Homepage:</th>
+        <td><a href="https://www.gnu.org/software/hello/manual/">https://www.gnu.org/software/hello/manual/</a></td>
+      </tr>
+      <tr>
+        <th>Maintainer(s):</th>
+        <td>post@steffenvogel.de</td>
+      </tr>
+      <tr>
+        <th>System:</th>
+        <td><tt>x86_64-linux</tt></td>
+      </tr>
+      <tr>
+        <th>Derivation store path:</th>
+        <td><tt>/nix/store/cnraiw0hbdl6jzdhbkn8dah2hqj7xgij-hello-2.12.3.drv</tt></td>
+      </tr>
+      <tr>
+        <th>Output store paths:</th>
+        <td>  <table class="info-table">      <tr>
+        <th><tt>out</tt></th>
+        <td><tt>/nix/store/5z2yp3ysx8476c8g5w25b0smlgkjvaq3-hello-2.12.3</tt></td>
+      </tr>  </table></td>
+      </tr>        <tr>
+          <th>Closure size:</th>
+          <td>36.73 MiB
+            (<a href="https://hydra.nixos.org/job/nixpkgs/unstable/hello.x86_64-linux#tabs-charts">history</a>)</td>
+        </tr>        <tr>
+          <th>Output size:</th>
+          <td>0.27 MiB
+            (<a href="https://hydra.nixos.org/job/nixpkgs/unstable/hello.x86_64-linux#tabs-charts">history</a>)</td>
+        </tr>        <tr>
+          <th>Availability:</th>
+          <td>              <em>Build output is available, but may be garbage-collected</em>          </td>
+        </tr>    </table>
+
+  </div>
+
+  <div id="tabs-buildinputs" class="tab-pane">
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr><th>Name</th><th>Type</th><th>Value</th><th>Revision</th><th>Store path</th></tr>
+    </thead>
+    <tbody>        <tr>
+          <td><tt>nixpkgs</tt></td>
+          <td>Git checkout</td>
+          <td>              <tt>https://github.com/nixos/nixpkgs.git</tt>          </td>
+          <td><tt class="rev-copy" onclick="copyToClipboard('6c6973cdf55fbe86579846439ec5ddd9a1198e46', this)" title="Click to copy">6c6973cdf55fbe86579846439ec5ddd9a1198e46</tt></td>
+          <td><tt>/nix/store/5f63xvldms9zr96gprgcf5i4y9yz362f-source</tt></td>
+        </tr>        <tr>
+          <td><tt>officialRelease</tt></td>
+          <td>Boolean</td>
+          <td>              <tt>false</tt>          </td>
+          <td></td>
+          <td><tt></tt></td>
+        </tr>    </tbody>
+  </table>
+  </div>
+    <div id="tabs-buildsteps" class="tab-pane">  <table class="table table-striped table-condensed clickable-rows">
+    <thead>
+      <tr><th>Nr</th><th>Step</th><th>Duration</th><th>Machine</th><th>Status</th></tr>
+    </thead>
+    <tbody>    </tbody>
+  </table>    </div>  <div id="tabs-build-deps" class="tab-pane">
+    <center><span class="spinner-border spinner-border-sm"/></center>
+  </div>
+  <script>    $(function() { makeLazyTab("tabs-build-deps", "https://hydra.nixos.org/build/347137367/build-deps", makeTreeCollapsible ); });  </script>  <div id="tabs-runtime-deps" class="tab-pane">
+    <center><span class="spinner-border spinner-border-sm"/></center>
+  </div>
+  <script>    $(function() { makeLazyTab("tabs-runtime-deps", "https://hydra.nixos.org/build/347137367/runtime-deps", makeTreeCollapsible ); });  </script>
+  <div id="tabs-runcommandlogs" class="tab-pane">    <div class="d-flex flex-column">    </div>
+  </div>
+</div>
+
+<div id="reproduce" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Reproduce this build</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+          <p>If you have <a href='https://nixos.org/download/'>Nix
+          installed</a>, you can reproduce this build on your own machine by
+          downloading <a href="https://hydra.nixos.org/build/347137367/reproduce">a script</a>
+          that checks out all inputs of the build and then invokes Nix to
+          perform the build.</p>
+
+          <p>To download and execute the script from the command line, run the
+          following command:</p>
+
+<div class="card bg-light"><div class="card-body p-2"><code>
+<span class="shell-prompt"># </span>curl <a href="https://hydra.nixos.org/build/347137367/reproduce">https://hydra.nixos.org/build/347137367/reproduce</a> | bash
+</code></div></div>
+
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <footer class="navbar">
+        <hr />
+        <small>
+          <em><a href="http://nixos.org/hydra" target="_blank" class="squiggle">Hydra</a> 0.1.20260827.d1e8d11 (using nix-2.35.3 and nix-eval-jobs-2.35.1).</em>        </small>
+      </footer>
+
+    </div>
+
+  <div id="hydra-signin" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="signin-form">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="username" class="col-form-label">User name</label>
+              <input type="text" class="form-control" name="username"/>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-form-label">Password</label>
+              <input type="password" class="form-control" name="password"/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    function finishSignOut() { }
+
+    $("#signin-form").submit(function(e) {
+      e.preventDefault();
+      requestJSON({
+        url: "https://hydra.nixos.org/login",
+        data: $(this).serialize(),
+        type: 'POST',
+        success: function(data) {
+          window.location.reload();
+        }
+      });
+      return false;
+    });
+
+    $("#sign-in-menu").on("click", function() {        $.getScript("https://apis.google.com/js/platform.js");    });
+
+  </script>
+    <script>
+      function onGoogleSignIn(googleUser) {
+        requestJSON({
+          url: "https://hydra.nixos.org/google-login",
+          data: "id_token=" + googleUser.credential,
+          type: 'POST',
+          success: function(data) {
+            window.location.reload();
+          }
+        });
+        return false;
+        };
+
+    </script>
+  </body>
+
+</html>

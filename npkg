@@ -1,0 +1,6 @@
+#!/bin/sh
+# npkg — lance le gestionnaire depuis un checkout, sans installation.
+# (ou : python3 -m pip install -e .  puis la commande `npkg` est dans le PATH)
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+export PYTHONPATH="$here/lib${PYTHONPATH:+:$PYTHONPATH}"
+exec "${PYTHON:-python3}" -m npkg "$@"
