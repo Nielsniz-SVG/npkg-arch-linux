@@ -401,32 +401,26 @@ def cmd_reinstall(args, engine: Engine, printer: Printer) -> int:
         printer.fail(f"pas des racines npkg : {', '.join(unknown)}")
         return EXIT_ERROR
 
-    # Vérifie que chaque paquet est toujours résolu vers le chemin
-    # actuellement utilisé par npkg. Cela détecte notamment un changement
-    # de store (/ancien/store -> /nix/store).
-    moved = []
+    moved_names = set()
+
+    # Un paquet peut être parfaitement valide mais installé dans un ancien
+    # store. Dans ce cas, il faut le considérer comme à réinstaller.
     for name in args.names:
         current = roots[name]
         resolution = engine.resolve_specs([name])[0]
         if current.store_path != resolution.store_path:
-            moved.append((name, current.store_path, resolution.store_path))
-
-    if moved:
-        for name, old_path, new_path in moved:
+            moved_names.add(name)
             printer.line(
                 f"  {name} : store changé "
-                f"{Path(old_path).parent} -> {Path(new_path).parent}"
+                f"{Path(current.store_path).parent} -> {Path(resolution.store_path).parent}"
             )
-            engine.invalidate(old_path)
+            engine.invalidate(current.store_path)
 
-    results = engine.verify(
-        [name for name in args.names if name not in {item[0] for item in moved}],
-        deep=True,
-    ) if len(moved) < len(args.names) else []
-
+    verify_names = [name for name in args.names if name not in moved_names]
+    results = engine.verify(verify_names, deep=True) if verify_names else []
     broken = [item for item in results if not item["ok"]]
 
-    if not moved and not broken:
+    if not moved_names and not broken:
         printer.ok("rien à refaire : " + ", ".join(args.names))
         return EXIT_OK
 
