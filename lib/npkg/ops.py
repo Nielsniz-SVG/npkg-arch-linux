@@ -310,35 +310,45 @@ class Engine:
                 raise LookupError(f"narinfo introuvable pour {store_path}")
             target = Path(store_path)
             known = self.valid.get(store_path)
-            if target.is_dir() and (known is None or not known.created):
-                # un chemin déjà là (posé par Nix, par un ami, par une exécution
-                # antérieure) : on l'adopte si son contenu correspond au NAR
-                # attendu, sinon on refuse d'écraser quoi que ce soit.
-                if not ni.nar_hash or nar_hash_of_dir(target) != ni.nar_hash:
-                    raise ValueError(
-                        f"{store_path} existe avec un contenu divergent ; "
-                        "supprimez-le (npkg gc, npkg repair) ou changez de store"
-                    )
-                entry = known or ValidEntry(path=store_path, name=Path(store_path).name)
-                entry.created = False
-                entry.nar_hash = ni.nar_hash
-                entry.nar_size = ni.nar_size
-                entry.refs = [ref for ref in ni.references if ref != store_path]
-                entry.cache = ni.cache_url
-                with _INDEX_LOCK:
-                    self.valid.put(entry)
-                self.log(f"  adopté (déjà présent, contenu conforme) : {Path(store_path).name}")
-                return store_path, 0
-            result = self.subs.fetch(ni, tmp, verify=self.opts.verify, progress=not self.opts.quiet)
-            entry = self.store.unpack_nar(result.nar_file, store_path, cache=result.cache)
-            entry.nar_hash = ni.nar_hash
-            entry.nar_size = ni.nar_size or result.nar_size
-            entry.refs = [ref for ref in ni.references if ref != store_path]
-            with _INDEX_LOCK:
-                self.valid.put(entry)
-            if not self.opts.keep_nar:
-                result.nar_file.unlink(missing_ok=True)
-            return store_path, entry.nar_size or 0
+            if target.exists() or target.is_symlink():
+                if known is None or not known.created:
+                # Un chemin déjà présent (posé par Nix, par un ami, par une exécution
+                # antérieure) : on l'adopte si son contenu correspond au NAR attendu,
+                # sinon on refuse d'écraser quoi que ce soit.
+                    if not ni.nar_hash:
+                        raise ValueError(
+                f"{store_path} existe déjà mais son NarHash attendu est inconnu"
+            )
+
+        if target.is_dir() and not target.is_symlink():
+            got = nar_hash_of_dir(target)
+        else:
+            # Les NAR peuvent avoir une racine qui est un fichier ou un lien.
+            # On sérialise donc la racine elle-même avec le même mécanisme NAR.
+            got = sha256_bytes(nar.dump_path(target))
+
+        if got != ni.nar_hash:
+            raise ValueError(
+                f"{store_path} existe avec un contenu divergent ; "
+                "supprimez-le manuellement ou changez de store"
+            )
+
+        entry = known or ValidEntry(
+            path=store_path,
+            name=Path(store_path).name,
+        )
+        entry.created = False
+        entry.nar_hash = ni.nar_hash
+        entry.nar_size = ni.nar_size
+        entry.refs = [ref for ref in ni.references if ref != store_path]
+        entry.cache = ni.cache_url
+        with _INDEX_LOCK:
+            self.valid.put(entry)
+        self.log(
+            f"  adopté (déjà présent, contenu conforme) : "
+            f"{Path(store_path).name}"
+        )
+        return store_path, 0
 
         with ThreadPoolExecutor(max_workers=max(1, self.opts.workers)) as pool:
             futures = {pool.submit(work, path): path for path in targets}
