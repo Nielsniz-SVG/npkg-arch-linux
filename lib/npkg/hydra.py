@@ -191,11 +191,13 @@ def _first_url(text: str) -> str:
 def jobset_for_channel(channel: str) -> list[str]:
     if channel in CHANNEL_JOBSETS:
         return CHANNEL_JOBSETS[channel]
-    m = re.match(r"nixpkgs-(\d{2})\.(\d{2})", channel)
+
+    m = re.match(r"nixpkgs-(\d{2})\.(\d{2})$", channel)
     if m:
-        major, minor = m.group(1), m.group(2)
-        return [f"staging-{major}.{minor}", f"release-{major}{minor}", "unstable"]
-    return [channel, "unstable"]
+        major, minor = m.groups()
+        return [f"staging-{major}.{minor}"]
+
+    return [channel]
 
 
 class HydraClient:
