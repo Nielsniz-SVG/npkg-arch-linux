@@ -400,16 +400,45 @@ def cmd_reinstall(args, engine: Engine, printer: Printer) -> int:
     if unknown:
         printer.fail(f"pas des racines npkg : {', '.join(unknown)}")
         return EXIT_ERROR
-    results = engine.verify(args.names, deep=True)
+
+    # Vérifie que chaque paquet est toujours résolu vers le chemin
+    # actuellement utilisé par npkg. Cela détecte notamment un changement
+    # de store (/ancien/store -> /nix/store).
+    moved = []
+    for name in args.names:
+        current = roots[name]
+        resolution = engine.resolve_specs([name])[0]
+        if current.store_path != resolution.store_path:
+            moved.append((name, current.store_path, resolution.store_path))
+
+    if moved:
+        for name, old_path, new_path in moved:
+            printer.line(
+                f"  {name} : store changé "
+                f"{Path(old_path).parent} -> {Path(new_path).parent}"
+            )
+            engine.invalidate(old_path)
+
+    results = engine.verify(
+        [name for name in args.names if name not in {item[0] for item in moved}],
+        deep=True,
+    ) if len(moved) < len(args.names) else []
+
     broken = [item for item in results if not item["ok"]]
-    if not broken:
+
+    if not moved and not broken:
         printer.ok("rien à refaire : " + ", ".join(args.names))
         return EXIT_OK
+
     for item in broken:
         printer.line(f"  {Path(item['path']).name} : " + "; ".join(item["checks"]))
         engine.invalidate(item["path"])
+
     report = engine.install(args.names)
-    printer.ok(f"refait : {', '.join(report.installed)} ({len(report.fetched)} chemin(s) téléchargés)")
+    printer.ok(
+        f"refait : {', '.join(report.installed)} "
+        f"({len(report.fetched)} chemin(s) téléchargés)"
+    )
     return EXIT_OK
 
 
