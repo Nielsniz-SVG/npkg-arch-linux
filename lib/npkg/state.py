@@ -238,6 +238,77 @@ class Profiles:
         gens = [item["generation"] for item in self.generations(profile)]
         return (max(gens) + 1) if gens else 1
 
+    def _sync_desktop_entries(
+        self,
+        store_paths: list[str],
+        profile: str = "default",
+    ) -> None:
+        """Expose les fichiers .desktop du profil dans le lanceur utilisateur."""
+        applications = Path.home() / ".local" / "share" / "applications"
+        applications.mkdir(parents=True, exist_ok=True)
+
+        bindir = self.home.profile(profile) / "bin"
+        wanted: dict[str, Path] = {}
+
+        for sp in store_paths:
+            src_dir = Path(sp) / "share" / "applications"
+            if not src_dir.is_dir():
+                continue
+
+            for entry in src_dir.glob("*.desktop"):
+                wanted[entry.name] = entry
+
+        marker = applications / ".npkg-managed"
+        managed: set[str] = set()
+
+        if marker.exists():
+            managed = {
+                line.strip()
+                for line in marker.read_text().splitlines()
+                if line.strip()
+            }
+
+        # Supprime uniquement les .desktop gérés par npkg qui ne sont plus installés.
+        for name in managed - wanted.keys():
+            target = applications / name
+            if target.is_file() or target.is_symlink():
+                target.unlink()
+
+        # Génère les .desktop utilisateur.
+        for name, src in wanted.items():
+            target = applications / name
+
+            # Ne jamais écraser un .desktop qui n'appartient pas à npkg.
+            if target.exists() and name not in managed:
+                continue
+
+            text = src.read_text()
+
+            lines = []
+            for line in text.splitlines():
+                if line.startswith("Exec="):
+                    command = line[5:].strip()
+                    parts = command.split(None, 1)
+                    program = parts[0] if parts else ""
+
+                    binary = bindir / Path(program).name
+                    if binary.exists():
+                        args = parts[1] if len(parts) > 1 else ""
+                        line = f"Exec={binary}"
+                        if args:
+                            line += f" {args}"
+
+                elif line.startswith("DBusActivatable="):
+                    line = "DBusActivatable=false"
+
+                lines.append(line)
+
+            target.write_text("\n".join(lines) + "\n")
+
+        marker.write_text(
+            "\n".join(sorted(wanted)) + ("\n" if wanted else "")
+        )
+
     def build(self, profile: str = "default", *, store_paths: list[str] | None = None) -> dict:
         """(Re)construit une génération à partir des chemins du store donnés."""
         if store_paths is None:
@@ -272,6 +343,7 @@ class Profiles:
         }
         (gen_dir / ".npkg-manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
         self.switch(profile, generation)
+        self._sync_desktop_entries(store_paths, profile)
         self.prune(profile)
         return manifest
 

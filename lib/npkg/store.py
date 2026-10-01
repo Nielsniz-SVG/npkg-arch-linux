@@ -166,23 +166,28 @@ class Store:
         digest, name = parse_store_path(store_path)
         target = Path(store_path)
         existing = self.index.get(store_path)
-        if target.exists():
+        if target.exists() or target.is_symlink():
             if existing is not None and existing.created:
-                shutil.rmtree(target)  # reconstruction demandee (`npkg repair`)
+                if target.is_dir() and not target.is_symlink():
+                    shutil.rmtree(target)
+                else:
+                    target.unlink()
             else:
                 raise FileExistsError(
-                    f"{store_path} existe deja et n'a pas ete depose par npkg"
-                )
+            f"{store_path} existe deja et n'a pas ete depose par npkg"
+        )
         staging = self.root / f".npkg-staging-{digest}-{int(time.time() * 1000) % 100000}"
-        staging.mkdir(parents=True, exist_ok=True)
         try:
             with open(nar_file, "rb") as fh:
+                print(f"DEBUG STORE: {store_path} <- {nar_file}")
                 stats = nar.extract(fh, staging)
             # un NAR de paquet a une racine « nominale » : le staging *est* le paquet
             os.replace(staging, target)
         finally:
-            if staging.exists():
+            if staging.is_dir() and not staging.is_symlink():
                 shutil.rmtree(staging, ignore_errors=True)
+            elif staging.exists() or staging.is_symlink():
+                staging.unlink(missing_ok=True)
         return ValidEntry(
             path=str(target),
             name=name,

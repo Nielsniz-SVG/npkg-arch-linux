@@ -156,14 +156,14 @@ def _safe_name(name: str) -> str:
 # ---------------------------------------------------------------------------
 
 def extract(fh: BinaryIO, dest: Path | str) -> dict:
-    """Déplie un NAR dans ``dest`` (créée) et renvoie des statistiques.
-
-    Les bits d'exécution et les liens symboliques viennent du NAR lui-même ;
-    c'est ce qui rend un binaire du store immédiatement exécutable.
+    """Extrait un NAR dont la racine peut être un répertoire, un fichier
+    régulier ou un lien symbolique.
     """
     dest = Path(dest)
-    dest.mkdir(parents=True, exist_ok=True)
-    stats = {"files": 0, "dirs": 1, "symlinks": 0, "bytes": 0, "execs": 0}
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    stats = {"files": 0, "dirs": 0, "symlinks": 0, "bytes": 0, "execs": 0}
+
     tok = _Tok(fh)
     tok.expect(MAGIC)
     _extract_node(tok, dest, stats, root=True)
@@ -200,8 +200,6 @@ def _extract_node(tok: _Tok, target: Path, stats: dict, *, root: bool = False) -
         kind = "directory"
     else:
         raise NarError(f"jeton inattendu en début de noeud : {head!r}")
-    if root and kind != "directory":
-        raise NarError("la racine d'un NAR de paquet doit être un répertoire")
 
     if kind == "directory":
         target.mkdir(parents=True, exist_ok=True)
